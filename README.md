@@ -1,8 +1,9 @@
 
 
+
 # 🛰️ CodeRadar
 
-> **CodeRadar** is an intelligent AI-powered code review platform designed to help developers write cleaner, more efficient, and maintainable code. By leveraging the power of AI, CodeRadar analyzes your code in real-time, detects potential bugs, suggests improvements, and ensures adherence to best practices.
+> **CodeRadar** is an intelligent AI-powered code review platform designed to help developers write cleaner, more efficient, and maintainable code. By leveraging the power of AI, CodeRadar analyzes your code in real time, detects potential bugs, suggests improvements, and ensures adherence to best practices.
 
 ---
 
@@ -23,10 +24,10 @@ Whether you’re a student, professional developer, or a team lead, CodeRadar em
 
 * Live code editor with **syntax highlighting**
 * AI-powered **code review suggestions**
-* Supports **JavaScript code**, with plans to extend to other languages
+* Supports **JavaScript code** (extensible to other languages)
 * Markdown-rendered review feedback with **highlighted code snippets**
-* Simple, intuitive **frontend interface**
-* Fully integrated with **Groq AI** for intelligent suggestions
+* Clean, intuitive **frontend UI**
+* Fully integrated with **Groq AI** for fast and accurate reviews
 
 ---
 
@@ -38,39 +39,37 @@ Just like a radar scans the environment to detect hidden objects, **CodeRadar sc
 
 ## 💻 Tech Stack
 
-**Frontend:**
+### Frontend
 
 * React.js
 * PrismJS (syntax highlighting)
 * react-simple-code-editor
 * react-markdown
 * rehype-highlight
+* Axios
 
-**Backend:**
+### Backend
 
-* Node.js + Express.js
-* Groq AI (Generative API)
-* CORS enabled for frontend-backend communication
-
-**Other:**
-
-* Axios for HTTP requests
-* dotenv for environment variables
+* Node.js
+* Express.js
+* Groq AI (LLM API)
+* CORS
+* dotenv
 
 ---
 
 ## ⚡ Getting Started
 
-### 1️⃣ Clone the repository
+### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/coderadar.git
+git clone https://github.com/SomyaSarswat/code-review/edit/main
 cd coderadar
 ```
 
 ---
 
-### 2️⃣ Setup Backend
+### 2️⃣ Backend Setup
 
 ```bash
 cd BackEnd
@@ -81,10 +80,10 @@ Create a `.env` file:
 
 ```env
 GROQ_API_KEY=your_groq_api_key_here
-PORT=3000
+PORT=5000
 ```
 
-Start the backend:
+Start the backend server:
 
 ```bash
 npm run dev
@@ -93,12 +92,15 @@ npm run dev
 You should see:
 
 ```
-🚀 Server running at http://localhost:3000
+🚀 Server running at http://localhost:5000
+📡 Health check: http://localhost:5000/
+🤖 AI endpoint: http://localhost:5000/ai/get-review
+🩺 AI health: http://localhost:5000/ai/health
 ```
 
 ---
 
-### 3️⃣ Setup Frontend
+### 3️⃣ Frontend Setup
 
 ```bash
 cd ../frontend
@@ -106,15 +108,25 @@ npm install
 npm run dev
 ```
 
-Open your browser at `http://localhost:5175` (Vite default port).
+Frontend will run at:
+
+```
+http://localhost:5173
+```
 
 ---
 
-### 4️⃣ Using CodeRadar
+## 🧠 Using CodeRadar
 
-1. Write your JavaScript code in the editor.
+1. Write or paste your JavaScript code in the editor.
 2. Click the **Review** button.
-3. AI-generated review will appear on the right panel in Markdown format.
+3. AI-generated review appears on the right panel in **Markdown format**.
+4. Review includes:
+
+   * Code issues
+   * Performance tips
+   * Best practices
+   * Refactoring suggestions
 
 ---
 
@@ -122,19 +134,19 @@ Open your browser at `http://localhost:5175` (Vite default port).
 
 ```
 BackEnd/
-├─ server.js          # Backend entry point
+├─ server.js
 ├─ src/
-│  ├─ app.js          # Express app with routes
+│  ├─ app.js
 │  ├─ controllers/
 │  │  └─ ai.controller.js
 │  ├─ routes/
 │  │  └─ ai.routes.js
 │  └─ services/
-│     └─ ai.service.js  # Groq AI integration
+│     └─ ai.service.js
 
 frontend/
 ├─ src/
-│  ├─ App.jsx          # Main React component
+│  ├─ App.jsx
 │  └─ App.css
 ├─ package.json
 ```
@@ -143,28 +155,39 @@ frontend/
 
 ## ⚙️ Environment Variables
 
-* `GROQ_API_KEY` — Your Groq API key for code review generation
-* `PORT` — Backend server port (default: 3000)
+| Variable       | Description                         |
+| -------------- | ----------------------------------- |
+| `GROQ_API_KEY` | Groq API key for AI reviews         |
+| `PORT`         | Backend server port (default: 5000) |
 
 ---
 
-## 💡 Tips
+## 💡 Tips & Troubleshooting
 
-* Make sure backend is running before clicking **Review** in the frontend.
-* For large code snippets, increase `express.json({ limit: '2mb' })` in `app.js`.
-* Use modern browsers (Chrome, Edge, Firefox) for best experience.
+* Ensure **backend is running** before clicking **Review**
+* If port is busy, kill it using:
+
+  ```bash
+  netstat -ano | findstr :5000
+  taskkill /PID <pid> /F
+  ```
+* Increase payload limit for large code:
+
+  ```js
+  app.use(express.json({ limit: "2mb" }))
+  ```
 
 ---
 
 ## 📦 Dependencies
 
-**Backend:**
+### Backend
 
 ```bash
 npm install express cors dotenv groq-sdk
 ```
 
-**Frontend:**
+### Frontend
 
 ```bash
 npm install react react-dom axios prismjs react-simple-code-editor react-markdown rehype-highlight highlight.js
@@ -174,34 +197,20 @@ npm install react react-dom axios prismjs react-simple-code-editor react-markdow
 
 ## 🎯 Future Improvements
 
-* Add **multi-language support** (Python, C++, Java)
-* Real-time streaming of AI review
-* Authentication & user accounts
-* Deploy frontend + backend to Vercel/Render
+* 🌍 Multi-language support (Python, C++, Java)
+* ⚡ Streaming AI responses
+* 🔐 Authentication & user profiles
+* ☁️ Cloud deployment (Vercel + Render)
+* 📊 Code quality scoring
 
 ---
 
 ## 🔗 Links
 
-* [Frontend Preview](http://localhost:5175)
-* [Backend API](http://localhost:3000)
+* **Frontend:** [http://localhost:5173](http://localhost:5173)
+* **Backend:** [http://localhost:5000](http://localhost:5000)
+* **AI Review Endpoint:** [http://localhost:5000/ai/get-review](http://localhost:5000/ai/get-review)
+* **Health Check:** [http://localhost:5000/](http://localhost:5000/)
 
 ---
 
-## 📄 License
-
-MIT License © 2025 Your Name
-
----
-
-This README now includes:
-
-* **Professional introduction** of CodeRadar
-* **Features and tech stack**
-* **Installation & usage instructions**
-* **Project structure, environment variables, and dependencies**
-* **Future improvements and links**
-
- 
-
- 
